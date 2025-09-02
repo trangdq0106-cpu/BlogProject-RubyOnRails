@@ -1,0 +1,95 @@
+<section class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+      <%= link_to root_path do %>
+        <%= image_tag("logo1.png", style: 'height:50px; width:50px;') %>
+        VenBlog
+      <% end %>
+    </div>
+    <nav>
+   <ul class="nav-list">
+      <li><%= link_to "BlOGLIST",venblog_blogs_path %></li>
+  </ul>
+   </nav>
+  </div>
+</section>
+
+<section class="container">
+     <%= image_tag("pexels-photo-580900.webp", style: 'width:100%; height:50vh; alt=banner')  %>
+</section>
+<br>
+<br>
+
+<div class="count-container">
+    <h2 class="subtitle is-5"><strong> Total <%= @blogs.count %></strong> Blogs</h2>
+</div>
+<%= form_tag root_path, method: :GET, class: 'search-container' do %>
+   <div class ='input-group'>
+       <div class ='form-outline'>
+       <%= text_field_tag :keyword, params[:keyword], class: 'search-bar', placeholder:"What can I help you with today?" %>
+       </div>
+   <%= submit_tag :search, class: 'btn btn-success' %>
+   </div>
+<% end %>
+<div class="album text-muted">
+   <div class="container">
+      <div class="row">
+         <% @blogs_all.each do |blog| %>
+         <div class="card">
+         <div class="card-block">
+            <div class="card-image"><%= image_tag("#{blog.image}", style: 'height:200px; width:100%; background-size: cover; background-position: center;') %></div>
+            <p class="card-title"><%= blog.title %></p>
+            <p class="btn btn-info btn-sm" ><%= blog.published ? 'PUBLISHED' : 'UNPUBLISH' %></p>
+            <p class="card-create"><%= blog.created_at %></p>
+            <p class="card-description"><%= blog.shortdescription %></p>
+            <p class="card-comment  ">Comment <%= blog.comments.count %></p>
+            <%= link_to "Show this blog", venblog_blog_path(blog), class: 'btn btn-read mt-auto mr-auto' %>
+         </div>
+         </div>
+         <% end %>
+      </div>
+   </div>
+</div>
+<div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+  <%= paginate @blogs_all, theme: 'bootstrap-5' %>
+  </div>
+</div></div>
+<br><br>
+<hr>
+<h2 class="subtitle is-5"><strong> The Lastest Blogs </strong> </h2>
+
+<% @lastest_blogs.each do |blog| %>
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0"><%= blog.title %></h3>
+          <div class="mb-1 text-muted"><%= blog.created_at %></div>
+          <div class="mb-1 text-muted"><strong class="d-inline-block mb-2 text-success"><%= blog.comments.count %> comments </strong> | <%= blog.published ? "PUBLISHED" : "UNPUBLISH" %></div>
+          <p class="card-text mb-auto"><%= blog.shortdescription %></p>
+          <p><%= link_to "Continue reading", venblog_blog_path(blog) %></p>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250"  role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <%= image_tag("#{blog.image}", style: 'height:200px; width:200px;') %></svg>
+        </div>
+      </div>
+  <% end %>
+  <hr>
+  <h2 class="subtitle is-5"><strong> The Lastest Comments </strong> </h2>
+
+  <div class="row d-flex justify-content-start" >
+    <% @comments.each do |comment| %>
+      <div class="col-lg-4">
+        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+        <h4 mb-0><%= comment.Name %></h4>
+        <p class="card-create"><cite title="Source Title"><%= comment.created_at %></cite></p>
+        <p><%= comment.comment.first(20) %></p>
+        <i><a href="<%= venblog_blog_path(comment.blog) %>#<%= comment.id %>">see more</a></i>
+      </div>
+    <% end %>
+</div>
+<br>
+
+
+

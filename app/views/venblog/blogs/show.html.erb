@@ -1,0 +1,74 @@
+<section class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+      <%= link_to root_path do %>
+        <%= image_tag("logo1.png", style: 'height:50px; width:50px;') %>
+        VenBlog
+      <% end %>
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><%= link_to "BlOGLIST", venblog_blogs_path %></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<section class="container">
+  <%= image_tag("pexels-photo-580900.webp", style: 'width:100%; height:50vh; alt=banner')  %>
+</section>
+<br>
+<br>
+
+<article class="blog-post">
+  <div class="row">
+    <div class="col-md-1 col-lg-2"></div>
+      <div class="col-md-10 col-lg-8 text-xs-center">
+      <h2 class="blog-post-title"><%= @blog.title %></h2>
+      <p class="blog-post-meta"><%= @blog.created_at %></a></p>
+      <p><%= @blog.shortdescription %></p>
+      <hr>
+      <p><%= @blog.description %><</p>
+      <div class="card-img"><%= image_tag("#{@blog.image}") %></p></div>
+    </div>
+  </div>
+</article>
+<hr>
+<h2 class="mb-0">Recent comments</h2>
+<h4 class="fw-light mb-4 pb-2"> <span class="fst-italic">Total <b><%= @comments_blog.count %></b> Comments</span></h4>
+<% @comments.each do |comment| %>
+ 
+  <div class="list-group w-auto" id="<%= comment.id %>">
+    <a href="<%= comment.id %>">
+    <a href="<%= blog_comments_path(@blog.id)%>" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+      <div class="d-flex gap-2 w-100 justify-content-between">
+        <div>
+          <h6 class="mb-0"><%= comment.Name %></h6>
+          <p class="mb-0 opacity-75"><%= comment.comment %></p>
+        </div>
+        <small class="opacity-50 text-nowrap"> <%= comment.created_at %></small>
+      </div>
+    </a>
+    <% end %>
+  </div>
+  <br>
+  <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-2" role="group" aria-label="First group">
+        <%= paginate @comments, theme: 'bootstrap-5' %>
+      </div>
+      </div>
+    </div>
+  
+  <hr>
+  <h2> Leave a Comment </h2>
+  <%= form_for([@blog, Comment.new], method: :POST) do |f| %>
+    <%= f.label :Name %><br>
+    <%= f.text_field :Name %><br>
+
+    <%= f.label :comment %><br>
+    <%= f.text_area :comment %><br>
+
+  <%= f.submit %>
+<% end %>
+<br>

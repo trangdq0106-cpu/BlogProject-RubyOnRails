@@ -1,0 +1,53 @@
+<section class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+      <%= link_to root_path do %>
+        <%= image_tag("logo1.png", style: 'height:50px; width:50px;') %>
+        VenBlog
+      <% end %>
+    </div>
+    <nav>
+   <ul class="nav-list">
+      <li><%= link_to "BlOGLIST",venblog_blogs_path %></li>
+  </ul>
+   </nav>
+  </div>
+</section>
+
+<section class="container">
+     <%= image_tag("pexels-photo-580900.webp", style: 'width:100%; height:50vh; alt=banner')  %>
+</section>
+<br>
+<br>
+<section class="section comments">
+  <div class="container">
+    <h2 class="subtitle is-5"><strong> All Comments </strong> </h2>
+    <h4 class="fw-light mb-4 pb-2"> <span class="fst-italic">Total <b><%= Comment.all.count %></b> Comments</span></h4>
+    <table class='table'>
+    <tr>
+      <th>Name</th>
+      <th>Short Comment</th>
+      <th>Create_at</th>
+      <th>Detail</th>
+    </tr>
+    <% @comments.each do |comment| %>  
+      <tr>
+      <td><%= comment.Name %></td>
+      <td><%= comment.comment.first(20) %></td>
+      <td><%= comment.created_at %></td> 
+      <td><%= link_to "Show this blog", venblog_blog_path(comment.blog_id) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  </div>
+</section>
+
+<div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+    <%= paginate @comments, theme: 'bootstrap-5' %>
+  </div>
+  </div>
+</div>
+<br>

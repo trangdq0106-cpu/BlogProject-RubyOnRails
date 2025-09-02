@@ -1,0 +1,71 @@
+<section class="navigation">
+  <div class="nav-container">
+    <div class="brand">
+      <%= link_to root_path do %>
+        <%= image_tag("logo1.png", style: 'height:50px; width:50px;') %>
+        VenBlog
+      <% end %>
+    </div>
+    <nav>
+   <ul class="nav-list">
+      <li><%= link_to "CREATE A BLOG", new_venblog_blog_path%></li>
+  </ul>
+   </nav>
+  </div>
+</section>
+
+<section class="container">
+  <%= image_tag("pexels-photo-580900.webp", style: 'width:100%; height:50vh; alt=banner')  %>
+</section>
+<br>
+<br>
+
+<div class="count-container">
+  <h2 class="blog-post-title"><strong> Total <%= @blogs.count %></strong> Blogs</h2>
+</div>
+
+<%= form_tag venblog_blogs_path, method: :GET, class: 'search-container' do %>
+  <div class ='input-group'>
+    <div class ='form-outline'>
+      <%= text_field_tag :keyword, params[:keyword], class: 'search-bar', placeholder:"What can I help you with today?" %>
+    </div>
+    <%= submit_tag :search, class: 'btn btn-success' %>
+  </div>
+<% end %>
+<div class="album text-muted">
+  <div class="container">
+    <div class="row">
+      <% @blogs_all.each do |blog| %>
+        <div class="card">
+          <div class="card-block">
+            <div class="card-image"><%= image_tag("#{blog.image}", style: 'height:200px; width:100%; background-size: cover; background-position: center;') %></div>
+            <p class="card-title"><%= blog.title %></p>
+            <p class="btn btn-info btn-sm" ><%= blog.published ? 'PUBLISHED' : 'UNPUBLISH' %></p>
+            <p class="card-create"><%= blog.created_at %></p>
+            <p class="card-description"><%= blog.description %></p>
+            <p class="card-comment  ">Comment <%= blog.comments.count %></p>
+            <%= link_to "Show this blog", venblog_blog_path(blog), class: 'btn btn-read mt-auto mr-auto' %>
+            <%= link_to 'Edit', edit_venblog_blog_path(blog) %>
+            <%= link_to 'Delete', venblog_blog_path(blog), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to detele this blog?' } %>
+          </div>
+       </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="clear_all txt_justify">
+  <div class="bd-example-snippet bd-code-snippet"><div class="bd-example">
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+    <%= paginate @blogs_all, theme: 'bootstrap-5' %>
+    </div>
+  </div>
+  </div>
+</div>
+<br><br>
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<div class="album text-muted">
+  <div class="container">
+    <div class="row">
+       <% @blogs.each do |blog| %>
+         <div class="card">
+            <div class="card-block">
+              <div class="card-image"><%= image_tag("#{blog.image}") %></div>
+              <p class="card-title"><%= blog.title %></p>
+              <a href="<%= blog_path(blog) %>"><%= image_tag("#{blog.image}", style: 'height:200px; width:200px;') %><a>
+              <p class="card-create"><%= blog.created_at %></p>
+              <p class='tags'><%= raw blog.tags.map { |t| link_to t.name, venblog_blog_path(tag: t.name) }.join(', ') %></p>
+              <p class="card-description"><%= truncate(blog.description), length: {130}/p>
+              <p class="card-comment"><%= link_to blog.comments.count , blog_comments_path(blog) %></p>
+              <%= link_to "Show this blog", venblog_blog_path(blog) %>
+            </div>
+         </div>
+       <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <%= paginate @blogs, theme: 'bootstrap-5' %>
+      </div>
+    </div>
+  </div>
+</div>

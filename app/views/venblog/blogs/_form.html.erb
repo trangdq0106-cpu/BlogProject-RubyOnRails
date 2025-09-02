@@ -1,0 +1,23 @@
+<%= simple_form_for([:venblog, @blog], data: { turbo: false }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+<div class="grid_container">
+  <div class="form-inputs">
+    <%= f.input :title, label: 'Title' %>
+    <%= f.input :shortdescription, label: 'Short Description' %>
+    <%= f.input :description, as: :text %>
+    <%= f.input :published %>
+    <%= f.file_field :image %>
+  </div>
+  <br><br>
+</div>
+ 
+  <div class="item_submit item_center item_bttm">
+    <%= f.button :submit, class: 'btn btn-success btn-block' %>
+  </div>
+<% end %>
+
+
+
+

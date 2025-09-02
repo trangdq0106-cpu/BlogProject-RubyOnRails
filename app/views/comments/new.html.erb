@@ -1,0 +1,27 @@
+<section>
+  <h2>Add a comment</h2>
+  <%= form_for @comments do |form| %>
+    <div>
+      <%= form.label :text, class: "form-label" %>
+      <%= form.text_field :text, required: true, autofocus: true, placeholder: 'Leave a comment', class: "form-input" %>
+    </div>
+    <%= form.submit "Comment", class: "form-button" %>
+  <% end %>
+</section>
+
+
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+        <div class="content">
+            <%= form_for @comment do |f| %>
+                <%= comment.Name %></strong>
+                <%= comment.comment %>
+
+            <% end %>
+        </div>
+    </div>
+
+    <%= link_to 'Delete', [comment.blog, comment], method: :delete, class: "button is-danger", data: { confirm: 'Are you sure?' } %>
+  </article>
+</div>
