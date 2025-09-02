@@ -15,11 +15,11 @@ Things you may want to cover:
 
 * Database initialization
 
-* How to run the test s* ...
+* How to run the test 
+*  ...
 =======
 # blog-project-rubyonrails
 Tạo site blog 
-uite
 
 * Services (job queues, cache servers, search engines, etc.)
 
