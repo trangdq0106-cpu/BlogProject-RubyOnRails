@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# blog-project-rubyonrails
+Tạo site blog 
+>>>>>>> 0bdb09d46fb215c0b28428544e720c54ee835b38
